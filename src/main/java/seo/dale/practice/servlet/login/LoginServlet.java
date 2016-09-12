@@ -24,19 +24,6 @@ import java.io.PrintWriter;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Log ServletContext's init parameters
-	 */
-	public void init() throws ServletException {
-		String dbURL = getServletContext().getInitParameter("dbURL");
-		String dbUser = getServletContext().getInitParameter("dbUser");
-		String dbUserPwd = getServletContext().getInitParameter("dbUserPwd");
-		log("dbURL : " + dbURL);
-		log("dbUser : " + dbUser);
-		log("dbUserPwd : " + dbUserPwd);
-	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//get request parameters for userID and password
 		String paramUsername = request.getParameter("user");
