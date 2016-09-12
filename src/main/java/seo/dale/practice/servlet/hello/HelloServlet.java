@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @WebServlet(
 	description = "User Servlet",
-	urlPatterns = { "/" , "/hello.do"},
+	urlPatterns = {"/hello.do"},
 	initParams = {@WebInitParam(name="id",value="1"), @WebInitParam(name="name",value="pankaj")}
 )
 public class HelloServlet extends HttpServlet {
