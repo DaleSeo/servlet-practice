@@ -7,23 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = { "/cookie/logout" })
-public class CookieLogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet(urlPatterns = { "/cookie/clear" })
+public class CookieClearServlet extends HttpServlet {
 
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
-			for (Cookie cookie : cookies){
-				if (cookie.getName().equals("username")){
-					cookie.setMaxAge(0);
-					response.addCookie(cookie);
-				}
+			for (Cookie cookie : cookies) {
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
 			}
+
 		}
-		response.sendRedirect("/cookie/LoginForm.html");
+
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<h1>Cookie Clear</h1>");
+		out.println("<p>cookie cleared!</p>");
 	}
 
 }

@@ -17,7 +17,19 @@ public class CookieLoginServlet extends HttpServlet {
 	private String servletUsername = "Dale";
 	private String servletPassword = "Seo";
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("username")) {
+					String username = cookie.getValue();
+					PrintWriter out= response.getWriter();
+					out.println(username + ", You're already logged in.");
+					return;
+				}
+			}
+		}
+
 		//get request parameters for username and password
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -27,9 +39,9 @@ public class CookieLoginServlet extends HttpServlet {
 			//setting cookie to expiry in 30 mins
 			loginCookie.setMaxAge(30 * 60);
 			response.addCookie(loginCookie);
-			response.sendRedirect("/view/cookie/LoginSuccess.jsp");
+			response.sendRedirect("/cookie/LoginSuccess.jsp");
 		} else {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/view/cookie/login.html");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cookie/LoginForm.html");
 			PrintWriter out= response.getWriter();
 			out.println("<font color=red>Either user name or password is wrong.</font>");
 			dispatcher.include(request, response);

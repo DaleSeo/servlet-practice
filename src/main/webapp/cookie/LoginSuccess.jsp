@@ -17,7 +17,7 @@
                 System.out.println("userName : " + userName);
         }
     }
-    if (userName == null) response.sendRedirect("login.html");
+    if (userName == null) response.sendRedirect("/cookie/LoginForm.html");
 %>
 <h3>Hi <%=userName %>, Login successful.</h3>
 <br>
